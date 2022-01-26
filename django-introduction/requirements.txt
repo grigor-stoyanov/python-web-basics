@@ -1,0 +1,4 @@
+sqlparse,
+asgiref,
+psycopg2-binary,
+Django
