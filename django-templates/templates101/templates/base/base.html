@@ -1,0 +1,21 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo Home</title>
+{#    <link rel="stylesheet" href="/static/main.css">#}
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+</head>
+<body>
+
+<ul>
+    <li>
+        <a href="{% url 'go to example' %}">Go to Example</a>
+    </li>
+</ul>
+{% block content %}
+{% endblock %}
+</body>
+</html>
