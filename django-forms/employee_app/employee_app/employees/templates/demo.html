@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>forms demo</title>
+</head>
+<body>
+    <h1>The Employees App</h1>
+    <h2>bound form to a set of data with validation </h2>
+    {# default form method is get #}
+    <form method="post" action="{% url 'create employee' %}"> {# mandatory #}
+        {% csrf_token %}
+        {{ employee_form }}
+        <button>Save</button>{# mandatory #}
+    </form>
+
+    <h2>unbound pure HTML form </h2>
+    <form>
+        <input type="text" required>
+        <input type="number" required>
+        <input type="range" required>
+        <input type="email" required>
+        <select>
+            <option>one</option>
+            <option>two</option>
+            <option>three</option>
+        </select>
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="radio" name="radios">
+        <input type="radio" name="radios">
+        <input type="radio" name="radios">
+        <input type="radio" name="radios">
+        <button>save</button>
+    </form>
+</body>
+</html>
