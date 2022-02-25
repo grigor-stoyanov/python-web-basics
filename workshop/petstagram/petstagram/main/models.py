@@ -3,7 +3,7 @@ import datetime
 from django.core.validators import MinLengthValidator, URLValidator
 from django.db import models
 
-from petstagram.main.validators import only_letters_validator, file_max_size
+from petstagram.main.validators import only_letters_validator, file_max_size, MinDateValidator, MaxDateValidator
 
 
 # Create your models here.
@@ -39,6 +39,7 @@ class Profile(models.Model):
     gender = models.CharField(
         max_length=max(len(x) for x, _ in GENDERS),
         choices=GENDERS,
+        default=GENDER_DO_NOT_SHOW,
     )
 
 
@@ -51,6 +52,7 @@ class Pet(models.Model):
     PARROT = 'Parrot'
     FISH = 'Fish'
     OTHER = 'Other'
+    MIN_DATE = datetime.date(1920, 1, 1)
     TYPES = [(x, x) for x in (CAT, DOG, BUNNY, PARROT, FISH, OTHER)]
     # fields
     name = models.CharField(
@@ -63,7 +65,10 @@ class Pet(models.Model):
     )
     birth_date = models.DateField(
         null=True,
-        blank=True
+        blank=True,
+        validators=(
+            MinDateValidator(MIN_DATE),
+        )
     )
     # relations one-to-one,one-to-many,many-to-many
     # one to many one user can have many pets but every pet 1 user

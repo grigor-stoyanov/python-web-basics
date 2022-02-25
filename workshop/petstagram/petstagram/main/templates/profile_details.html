@@ -10,19 +10,28 @@
             <div class="d-inline p-2 w-50">
                 <div class="d-flex flex-column">
                     <h5><u>Name:</u> {{ profile.first_name }} {{ profile.last_name }}</h5>
+                    {# getter property `fullname` in profile is also fine #}
                     <!-- If Date of Birth -->
-                    <h5><u>Birthdate:</u> {{ profile.birth_date }}</h5>
+                    {% if profile.birth_date %}
+                        <h5><u>Birthdate:</u> {{ profile.birth_date }}</h5>
+                    {% endif %}
                     <!-- If Email -->
-                    <h5><u>Email:</u> {{ profile.email }}</h5>
+                    {% if profile.email %}
+                        <h5><u>Email:</u> {{ profile.email }}</h5>
+                    {% endif %}
                     <!-- If Gender is Chosen -->
-                    <h5><u>Gender:</u> {{ profile.gender }}</h5>
+                    {% if profile.gender %}
+                        <h5><u>Gender:</u> {{ profile.gender }}</h5>
+                    {% endif %}
                     <!-- If Description -->
-                    <h5><u>Description:</u> {{ profile.description }}</h5>
+                    {% if profile.description %}
+                        <h5><u>Description:</u> {{ profile.description }}</h5>
+                    {% endif %}
                 </div>
-                <p class="mt-2">Total Images: 2</p>
-                <p class="mt-2">Total Likes: 21</p>
-                <a href="#" class="btn btn-primary">Edit</a>
-                <a href="#" class="btn btn-danger">Delete</a>
+                <p class="mt-2">Total Images: {{ total_images_count }}</p>
+                <p class="mt-2">Total Likes: {{ total_likes_count }}</p>
+                <a href="{% url 'edit profile' %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'delete profile' %}" class="btn btn-danger">Delete</a>
             </div>
         </div>
     </div>
@@ -38,8 +47,8 @@
                 <div style="width: 18rem;">
                     <h5>{{ pet.name }}</h5>
                     <p class="mt-2">{% if pet.birth_date %}Age: {{ pet.birth_date|years_to_now }}{% endif %}</p>
-                    <a href="#" class="btn btn-primary">Edit</a>
-                    <a href="#" class="btn btn-danger">Delete</a>
+                    <a href="{% url 'edit pet' pet.pk %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'delete pet' pet.pk %}" class="btn btn-danger">Delete</a>
                 </div>
             {% endfor %}
         </div>

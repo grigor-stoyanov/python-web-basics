@@ -14,10 +14,10 @@
                         <p class="lead">
                             {% if hp %}
                                 <!-- Button to show if profile created -->
-                                <a href="#" class="btn btn-lg btn-secondary">Enter</a></p>
+                                <a href="{% url 'dashboard' %}" class="btn btn-lg btn-secondary">Enter</a></p>
                             {% else %}
                                 <!-- Button to show if profile is NOT created -->
-                                <a href="#" class="btn btn-lg btn-secondary">Create Profile</a>
+                                <a href="{% url 'create profile' %}" class="btn btn-lg btn-secondary">Create Profile</a>
                             {% endif %}
                     </div>
                 </div>
