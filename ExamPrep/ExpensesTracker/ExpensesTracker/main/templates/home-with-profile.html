@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load calc %}
+{% block content %}
+    <!-- Summary -->
+    {% if expenses %}
+        <div>
+            <h1>Summary</h1>
+            <ul class="expenses-list">
+                <!-- User Budget -->
+                <li class="blue">{{ user.budget|floatformat:2 }}$</li>
+                <!-- First Expense -->
+                {% for expense in expenses %}
+                    <li class="red"> - {{ expense.price|floatformat:2 }}$</li>
+                {% endfor %}
+                <!-- Money Left -->
+                <li class="green">=  {% count_leftover %}$ left</li>
+            </ul>
+        </div>
+        <!-- End Summary -->
+    {% endif %}
+    <!-- Headline My Expenses -->
+    <h1>My Expenses</h1>
+    <!-- Add Expense Button -->
+    <a class="button add" href="{% url 'main:create expense' %}">Add Expense</a>
+    {% if expenses %}
+        <div class="expenses-container">
+            {% for expense in expenses %}
+                <!-- First Expense Container -->
+                <div class="expense-container">
+                    <!-- Expense Title -->
+                    <h2>{{ expense.title }}</h2>
+                    <!-- Expense Image -->
+                    <img src="{{ expense.expense_image }}"
+                         alt="description">
+                    <!-- Expense Description -->
+                    <p>{{expense.description}}</p>
+                    <div class="expense-detail">
+                        <div>
+                            <!-- Expense Price -->
+                            <p>Price: {{ expense.price|floatformat:2 }}$</p>
+                        </div>
+                        <div class="right">
+                            <!-- Edit Expense Button -->
+                            <a class="button edit" href="{% url "main:edit expense" expense.pk %}">Edit</a>
+                            <!-- Delete Expense Button -->
+                            <a class="button delete" href="{% url 'main:delete expense' expense.pk %}">Delete</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- End First Expense Container -->
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

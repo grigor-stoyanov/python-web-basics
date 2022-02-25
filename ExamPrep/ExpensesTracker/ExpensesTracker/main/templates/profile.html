@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load strings %}
+{% load calc    %}
+    <!-- Your Profile Data -->
+    <h1>Your Profile</h1>
+    <div class="expenses-container">
+        <div class="expense-container">
+            <!-- Full Name -->
+            <h2>{% full_name profile%}</h2>
+            <!-- Profile Image -->
+            <img src="{{ profile.profile_image.url }}" alt="profile pic">
+            <!-- Profile Description -->
+            <!-- Total Items Bought -->
+            <p>Total Items Bought: {% count_items_bought %}</p>
+            <!-- Budget Left -->
+            <p>Budget Left: {% count_leftover %}$</p>
+            <div class="right">
+                <!-- Edit Profile Button -->
+                <a class="button edit" href="{% url 'main:edit profile'%}">Edit Profile</a>
+                <!-- Delete Profile Button -->
+                <a class="button delete" href="{% url 'main:delete profile'%}">Delete Profile</a>
+            </div>
+        </div>
+    </div>
+    <!-- End Your Profile Data -->
+{% endblock %}
